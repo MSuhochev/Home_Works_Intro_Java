@@ -15,6 +15,7 @@ public class task_2 {
                 sieve.set(0, sieveSize - 1, true);
                 sieve.set(0, false);
                 sieve.set(1, false);
+                
                 for (int i = 2; i * i < sieve.length(); i++) {
                     if (sieve.get(i)) {
                         for (int j = i * i; j < sieve.length(); j += i) {
