@@ -3,22 +3,35 @@
 package Seminar_1;
 
 import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
 
 public class task_2 {
+
     public static void main(String[] args) {
-        ArrayList<Integer> myArrayList = new ArrayList<Integer>(); // создаём пустой список для накопления простых чисел
-        for (int minValue = 2; minValue <= 1001; minValue++) {
-            boolean primeNum = true;                              // флаг для простого числа 
-            for (int j = 2; j <= Math.sqrt(minValue); j++) {      
-                if ((minValue % j) == 0) {                        // Если есть делитель - флаг = false
-                    primeNum = false;
-                    break;
+        class getPrimesNumbers {
+            public List<Integer> getAllPrimesLessThan(int sieveSize) {
+                var sieve = new BitSet(sieveSize);
+                sieve.set(0, sieveSize - 1, true);
+                sieve.set(0, false);
+                sieve.set(1, false);
+                for (int i = 2; i * i < sieve.length(); i++) {
+                    if (sieve.get(i)) {
+                        for (int j = i * i; j < sieve.length(); j += i) {
+                            sieve.set(j, false);
+                        }
+                    }
                 }
-            }
-            if (primeNum) {
-                myArrayList.add(minValue);            // если делителей нет, флаг True, добавляем элемент в список
+                List<Integer> primes = new ArrayList<>();
+                for (int i = 2; i < sieve.length(); i++) {
+                    if (sieve.get(i)) {
+                        primes.add(i);
+                    }
+                }
+                return primes;
             }
         }
-        System.out.print(myArrayList);               //вывод списка в консоль
+        var primes = new getPrimesNumbers().getAllPrimesLessThan(1000);
+        System.out.println("Список простых чисел от 1 до 1000 " + primes);
     }
 }
