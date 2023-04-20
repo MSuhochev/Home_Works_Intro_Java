@@ -5,47 +5,52 @@
 package Seminar_1;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class task_4 {
-    static int num_mirror(int a) {
-        int f = 0;
-        while (a > 10) {
-            f += a % 10;
-            f *= 10;
-            a /= 10;
-        }
-        f += a;
-        return f;
-    }
 
     public static void main(String[] args) {
-
+        Scanner num = new Scanner(System.in);
+        System.out.println("Введите значение x от 1 до 9:");
+        int x = num.nextInt();
+        System.out.println("Введите значение y от 0 до 9:");
+        int y = num.nextInt();
+        num.close();
         Random random = new Random();
-        int x = random.nextInt(10, 99);
-        int y = random.nextInt(10, 99);
-        int e = x + y;
-        int q = x / 10;
-        int w = num_mirror(y) / 10;
-        System.out.printf("Дано уравнение:   %dx + x%d = %d\n", q, w, e);
+        int x1 = random.nextInt(1, 9);
+        int y1 = random.nextInt(0, 9);
+        int e = random.nextInt(10, 99);
+
+        System.out.println("Дано уравнение: " + x1 + 'x' + '+' + 'y' + y1 + '=' + e);
+
+        if ((x1 * 10 + x) + (y * 10 + y1) == e) {
+            System.out.print("Решение уравнения: " + x1 + x + '+' + y + y1 + '=' + e + " верное!\n");
+            return;
+        } else {
+            System.out.print("Решение уравнения: " + x1 + x + '+' + y + y1 + '=' + e + " - не верное!\n");
+        }
+
         int q1 = 0;
         int w1 = 0;
-        int temp = 0;
+        int tmp = 0;
+        boolean have = true;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                temp = ((q * 10) + i) + (w + (10 * j));
-                if (temp == e) {
-                    q1 = ((q * 10) + i);
-                    w1 = (w + (10 * j));
-
+                tmp = ((x1 * 10 + i) + (j * 10 + y1));
+                if (tmp == e) {
+                    q1 = i;
+                    w1 = j;
+                    System.out.print("Возможное решение:\n");
+                    System.out.print("\nВерное равенство: " + x1 + q1 + '+' + w1 + y1 + '=' + e);
+                    return;
+                }
+                else { 
+                    have = false;
                 }
             }
         }
-        if (q1 != 0 & w1 != 0) {
-            System.out.printf("\nВерное равенство: %d + %d = %d\n", q1, w1, q1 + w1);
-            System.out.printf("\tПРОВЕРКА: %d + %d = %d\n\n", x, y, e);
-
-        } else {
+        if (have == false) {
             System.out.println("\nРешения нет!\n");
-        }
+        } 
     }
 }
