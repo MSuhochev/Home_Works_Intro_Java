@@ -3,22 +3,14 @@ package Seminar_3;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /*Пусть дан произвольный список целых чисел, удалить из него чётные числа */
 
 public class task_2 {
     public static void main(String[] args) {
         List<Integer> myList = new ArrayList<Integer>();
-        myList.add(3);
-        myList.add(1);
-        myList.add(2);
-        myList.add(5);
-        myList.add(6);
-        myList.add(4);
-        myList.add(9);
-        myList.add(7);
-        myList.add(10);
-        myList.add(8);
+        fillList(myList);
 
         System.out.println("Исходный список целых чисел --> " + myList);
         Iterator<Integer> col = myList.iterator();
@@ -28,6 +20,15 @@ public class task_2 {
             }
         }
         System.out.println("Нечётные числа из исходного списка -->" + myList);
+    }
+    
+    public static void fillList(List<Integer>myList) {
+        Random rnd = new Random();
+        for (int i = 0; i < 15; i++){
+            int k = rnd.nextInt(10);
+            myList.add(k);
+        }
+        
     }
     
 

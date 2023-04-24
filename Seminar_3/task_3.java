@@ -4,22 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Random;
 
 /*Задан целочисленный список ArrayList. Найти минимальное, максимальное и среднее из этого списка. */
 
 public class task_3 {
     public static void main(String[] args) {
         List<Integer> myList = new ArrayList<Integer>();
-        myList.add(3);
-        myList.add(1);
-        myList.add(2);
-        myList.add(5);
-        myList.add(6);
-        myList.add(4);
-        myList.add(9);
-        myList.add(7);
-        myList.add(10);
-        myList.add(8);
+        fillList(myList);
 
         System.out.println("Исходный список целых чисел --> " + myList);
 
@@ -37,5 +29,14 @@ public class task_3 {
         return list.stream()
                 .mapToInt(a -> a)
                 .average().orElse(0);
+    }
+
+    public static void fillList(List<Integer>myList) {
+        Random rnd = new Random();
+        for (int i = 0; i < 15; i++){
+            int k = rnd.nextInt(10);
+            myList.add(k);
+        }
+        
     }
 }
